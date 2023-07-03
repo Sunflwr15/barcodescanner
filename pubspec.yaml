@@ -1,0 +1,28 @@
+name: barcode_scanner
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: '>=3.0.0-202.0.dev <4.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  get: 4.6.5
+  flutter:
+    sdk: flutter
+  simple_barcode_scanner: ^0.0.8
+  firebase_core: ^2.14.0
+  firebase_storage: ^11.0.11
+  cloud_firestore: ^4.3.2
+
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - part/53701BZ700.jpeg
+    - part/_.jpeg
