@@ -11,8 +11,11 @@ buildscript {
 }
 
 apply plugin: 'com.android.application'
+// def flutterRoot = '/Users/Zul/flutter/bin/flutter'
+
 apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply from: "/Users/Zul/flutter/packages/flutter_tools/gradle/flutter.gradle"
+// apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion flutter.compileSdkVersion
@@ -33,10 +36,13 @@ android {
 
     defaultConfig {
         applicationId "com.barcode.barcode_scanner"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 19
+        // minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 1
+        // versionCode flutterVersionCode.toInteger()
+        versionName "1.0.0"
+        // versionName flutterVersionName
         // Add multidex support if needed
         multiDexEnabled true
     }
@@ -62,8 +68,11 @@ dependencies {
     // Add other Firebase dependencies if you are using them
 }
 
-apply plugin: 'com.google.gms.google-services' // Add or replace this line
+// apply plugin: 'com.google.gms.google-services' // Add or replace this line
 
-task clean(type: Delete) {
+task myClean(type: Delete) {
     delete rootProject.buildDir
 }
+// task clean(type: Delete) {
+//     delete rootProject.buildDir
+// }
