@@ -1,3 +1,6 @@
+// import 'dart:html';
+
+import 'package:barcode_scanner/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -6,11 +9,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 // import 'package:file_picker/file_picker.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:barcode_scanner/app/routes/app_pages.dart';
 
 class MainController extends GetxController {
+  // final controller = Get.find<HomeController>();
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   FirebaseStorage storage = FirebaseStorage.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  Stream<User?> streamAuthStatus() => auth.authStateChanges();
+
+  void checkFirestoreConnection() {
+    FirebaseFirestore.instance.collection('description').snapshots().listen(
+        (snapshot) {
+      print('Connected to Firestore'); // Connection successful
+    }, onError: (error) {
+      print('Failed to connect to Firestore: $error'); // Connection failed
+    });
+  }
 
   addData(bool aktifSlider, String deskSlider, String gambarSlider) async {
     CollectionReference slider = firestore.collection('');
@@ -33,29 +51,29 @@ class MainController extends GetxController {
     }
   }
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> getData(
-      String documentId) async {
-    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
-        .instance
-        .collection('your_collection_name')
-        .doc(documentId)
-        .get();
+  Future<void> login() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInAnonymously();
+      User? user = userCredential.user;
 
-    if (snapshot.exists) {
-      // Document with the given ID exists
-      return snapshot;
-    } else {
-      // Document with the given ID does not exist
-      throw Exception('Document not found');
+      if (user != null) {
+        // Anonymous sign-in successful
+        // Handle the signed-in user
+        print('Signed in anonymously with user ID: ${user.uid}');
+      } else {
+        // Anonymous sign-in failed
+        print('Anonymous sign-in failed');
+      }
+    } catch (e) {
+      // Error occurred during anonymous sign-in
+      print('Error signing in anonymously: $e');
     }
   }
 
-  Future<DocumentSnapshot<Object?>> getDocumentById(RxString documentId) async {
-    DocumentSnapshot<Object?> snapshot = await FirebaseFirestore.instance
-        .collection('your_collection_name')
-        .doc(documentId as String)
-        .get();
-
-    return snapshot;
-  }
+  // Future<QuerySnapshot<Object?>> getDocumentById(String documentId) async {
+  //   CollectionReference produk = firestore.collection('part');
+  //   print(produk);
+  //   return await produk.get();
+  // }
 }

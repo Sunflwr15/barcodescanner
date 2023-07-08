@@ -11,9 +11,14 @@ import 'firebase_options.dart';
 void main() async {
   // Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    print("Firebase Connection State: Connected");
+  } catch (e) {
+    print("Firebase Connection State: Not Connected");
+  }
 
   // Run your app
   runApp(MyApp());

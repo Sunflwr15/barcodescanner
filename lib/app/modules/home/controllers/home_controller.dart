@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:barcode_scanner/app/data/controller/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
@@ -14,6 +15,7 @@ class HomeController extends GetxController {
   TextEditingController resultBarcode = TextEditingController();
   double scale = 1.0;
   double _previousScale = 1.0;
+  final controllerFirebase = Get.put(MainController());
   final TransformationController transformationController =
       TransformationController();
   String imagePath = '';
@@ -23,7 +25,11 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     checkImageExists();
+    // controllerFirebase.login();
+    controllerFirebase.checkFirestoreConnection();
   }
+
+  
 
   void res(context) async {
     final response = await Navigator.push(

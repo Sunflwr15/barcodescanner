@@ -14,7 +14,7 @@ apply plugin: 'com.android.application'
 // def flutterRoot = '/Users/Zul/flutter/bin/flutter'
 
 apply plugin: 'kotlin-android'
-apply from: "/Users/Zul/flutter/packages/flutter_tools/gradle/flutter.gradle"
+apply from: "/Users/gathfan/Documents/flutter/packages/flutter_tools/gradle/flutter.gradle"
 // apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
