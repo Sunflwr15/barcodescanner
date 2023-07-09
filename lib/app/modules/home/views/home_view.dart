@@ -23,7 +23,7 @@ class HomeView extends GetView<HomeController> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -33,6 +33,7 @@ class HomeView extends GetView<HomeController> {
                   children: [
                     Expanded(
                       child: TextField(
+                        autofocus: true,
                         controller: controller.resultBarcode,
                         onChanged: (value) {
                           controller.onChange(value);
@@ -71,65 +72,60 @@ class HomeView extends GetView<HomeController> {
                   ],
                 ),
                 SizedBox(height: 20),
-                Wrap(
-                  spacing: 10,
-                  direction: Axis.vertical,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    Center(
-                      child: Container(
-                        margin: EdgeInsets.only(top: 20),
-                        decoration: BoxDecoration(
-                          // border: Border.all(
-                          //   color: Colors.black,
-                          //   width: 4.0,
-                          // ),
-                          // borderRadius: BorderRadius.circular(50)
-                        ),
-                        // child: FutureBuilder<QuerySnapshot<Object?>>(
-                        //   future: controllerFirebase.getDocumentById(
-                        //       controller.result.value),
-                        //   builder: (context, snapshot) {
-                        //     if (snapshot.connectionState ==
-                        //         ConnectionState.waiting) {
-                        //       return CircularProgressIndicator();
-                        //     } else if (snapshot.hasError) {
-                        //       print(snapshot.error);
-                        //       return Text('Error: ${snapshot.error.toString()}');
-                        //     } else if (snapshot.hasData) {
-                        //       var partData = snapshot.data!.docs;
-                        //       print(partData);
-                        //       return InteractiveViewer(
-                        //         transformationController:
-                        //             controller.transformationController,
-                        //         onInteractionUpdate: (details) {
-                        //           controller.interactionUpdate();
-                        //         },
-                        //         minScale: 0.5,
-                        //         maxScale: 4.0,
-                        //         child: Wrap(
-                        //           alignment: WrapAlignment.center,
-                        //           direction: Axis.vertical,
-                        //           runAlignment: WrapAlignment.center,
-                        //           crossAxisAlignment: WrapCrossAlignment.center,
-                        //           children: [
-                        //             Image.asset(
-                        //               '',
-                        //               fit: BoxFit.cover,
-                        //               width: width / 1.1,
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       );
-                        //     } else {
-                        //       return Container();
-                        //     }
-                        //   },
-                        // ),
+                Container(
+                  width: width,
+                  child: Wrap(
+                    spacing: 10,
+                    direction: Axis.vertical,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      Center(
+                        child: Container(
+                            margin: EdgeInsets.only(top: 20),
+                            decoration: BoxDecoration(
+                                // border: Border.all(
+                                //   color: Colors.black,
+                                //   width: 4.0,
+                                // ),
+                                // borderRadius: BorderRadius.circular(50)
+                                ),
+                            child: FutureBuilder<QuerySnapshot<Object?>>(
+                              future: controllerFirebase
+                                  .getData(controller.resultBarcode.text),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  var docs = snapshot.data!.docs;
+                                  print("IMAGE DATA ${docs.length}");
+                                  return docs.length != 0 ? Wrap(
+                                    children: List.generate(docs.length, (index) {
+                                      return InteractiveViewer(
+                                        transformationController:
+                                            controller.transformationController,
+                                        onInteractionUpdate: (details) {
+                                          controller.interactionUpdate();
+                                        },
+                                        minScale: 0.5,
+                                        maxScale: 4.0,
+                                        child: Image.network(
+                                          (docs[index].data()
+                                                  as Map<String, dynamic>)[
+                                              "part_image"], // Replace with the actual field name from your Firestore document
+                                          fit: BoxFit.cover,
+                                          width: width / 1.1,
+                                        ),
+                                      );
+                                    }),
+                                  ) : Center(child: Text("Document is not available or it doesn't exist"));
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              },
+                            )),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -139,3 +135,31 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
+
+
+ //  else {
+                              //   var partData = snapshot.data!.docs;
+                              //   print("PART DATA: $partData");
+
+                              //   // Access the first document in the query snapshot
+                              //   var documentSnapshot = snapshot.data!.docs[0];
+                              //   var imageUrl = documentSnapshot['part_image'];
+                              //   return Column(
+                              //     children: List.generate(
+                              //         partData.length,
+                              //         (index) => InteractiveViewer(
+                              //               transformationController: controller
+                              //                   .transformationController,
+                              //               onInteractionUpdate: (details) {
+                              //                 controller.interactionUpdate();
+                              //               },
+                              //               minScale: 0.5,
+                              //               maxScale: 4.0,
+                              //               child: Image.network(
+                              //                 partData[index].toString(), // Replace with the actual field name from your Firestore document
+                              //                 fit: BoxFit.cover,
+                              //                 width: width / 1.1,
+                              //               ),
+                              //             )).toList(),
+                              //   );
+                              // }

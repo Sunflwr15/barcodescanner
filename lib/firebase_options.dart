@@ -44,40 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBLnvw1JSjsItoOS6xn1PRZ2jAyWkOzfEY',
-    appId: '1:419084311118:web:e84cd0273a35ade7dc011f',
-    messagingSenderId: '419084311118',
-    projectId: 'tokopedia-a1a1a',
-    authDomain: 'tokopedia-a1a1a.firebaseapp.com',
-    storageBucket: 'tokopedia-a1a1a.appspot.com',
-    measurementId: 'G-4XYPG9JGYP',
+    apiKey: 'AIzaSyDTnxQxsmduhZZW-KsK-UwlGagSWT5a-80',
+    appId: '1:483427277183:web:3e1561af749877e476224a',
+    messagingSenderId: '483427277183',
+    projectId: 'partbarcode-db',
+    authDomain: 'partbarcode-db.firebaseapp.com',
+    storageBucket: 'partbarcode-db.appspot.com',
+    measurementId: 'G-6HE2VT4N57',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyATzP8UrWDQxXugVKSPOapm9fdQa0Gy744',
-    appId: '1:419084311118:android:80d288008bfebad7dc011f',
-    messagingSenderId: '419084311118',
-    projectId: 'tokopedia-a1a1a',
-    storageBucket: 'tokopedia-a1a1a.appspot.com',
+    apiKey: 'AIzaSyBOIPWWq6FpzAcOMVXckUWyqpxHqF0g2gU',
+    appId: '1:483427277183:android:8906485595ea6ac376224a',
+    messagingSenderId: '483427277183',
+    projectId: 'partbarcode-db',
+    storageBucket: 'partbarcode-db.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBwp2pZpzbGb_RhXKrdHrnkbcQfivA9bp4',
-    appId: '1:419084311118:ios:bfc146ea1dd55d48dc011f',
-    messagingSenderId: '419084311118',
-    projectId: 'tokopedia-a1a1a',
-    storageBucket: 'tokopedia-a1a1a.appspot.com',
-    iosClientId: '419084311118-a1iflaesne9iq8k3996lukred3ulrns5.apps.googleusercontent.com',
-    iosBundleId: 'com.tokopedia.tokopedia',
+    apiKey: 'AIzaSyBR6OxBEOEusDc5XIudQzcYb_uxnkDSIMs',
+    appId: '1:483427277183:ios:3e5b25f55960079276224a',
+    messagingSenderId: '483427277183',
+    projectId: 'partbarcode-db',
+    storageBucket: 'partbarcode-db.appspot.com',
+    iosClientId: '483427277183-9hbed8c3b1dlu4scollq1gi5jclusj1u.apps.googleusercontent.com',
+    iosBundleId: 'com.barcode.barcodeScanner',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBwp2pZpzbGb_RhXKrdHrnkbcQfivA9bp4',
-    appId: '1:419084311118:ios:bfc146ea1dd55d48dc011f',
-    messagingSenderId: '419084311118',
-    projectId: 'tokopedia-a1a1a',
-    storageBucket: 'tokopedia-a1a1a.appspot.com',
-    iosClientId: '419084311118-a1iflaesne9iq8k3996lukred3ulrns5.apps.googleusercontent.com',
-    iosBundleId: 'com.tokopedia.tokopedia',
+    apiKey: 'AIzaSyBR6OxBEOEusDc5XIudQzcYb_uxnkDSIMs',
+    appId: '1:483427277183:ios:cd1d69345124f44c76224a',
+    messagingSenderId: '483427277183',
+    projectId: 'partbarcode-db',
+    storageBucket: 'partbarcode-db.appspot.com',
+    iosClientId: '483427277183-95eh53giktfij9ekq3no1l8hrakpkug4.apps.googleusercontent.com',
+    iosBundleId: 'com.barcode.barcodeScanner.RunnerTests',
   );
 }

@@ -24,7 +24,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    checkImageExists();
     // controllerFirebase.login();
     controllerFirebase.checkFirestoreConnection();
   }
@@ -39,7 +38,6 @@ class HomeController extends GetxController {
     print("response => $response");
     barcode.value = response.toString();
     resultBarcode.text = barcode.value;
-    print("Image Exist: $imageExists");
     print("Barcode Value: ${resultBarcode.text}");
     onChange(response);
   }
@@ -53,24 +51,10 @@ class HomeController extends GetxController {
     );
     print("===== ${resultBarcode.text} ======");
     barcode.value = resultBarcode.text;
-    checkImageExists();
   }
 
   void interactionUpdate() {
     scale = transformationController.value.getMaxScaleOnAxis();
-  }
-
-  void checkImageExists() async {
-    print("==== CHECK IMAGE EXISTS ====");
-    print(resultBarcode.text);
-    imagePath = 'assets/${barcode.value}.jpeg';
-    imageExists = await rootBundle
-        .load(imagePath)
-        .then((value) =>
-            true) // Set imageExists to true if the image is successfully loaded
-        .catchError(
-            (error) => false); // Set imageExists to false if an error occurs
-    print("Image Exist: $imageExists");
   }
 
   @override

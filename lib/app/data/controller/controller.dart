@@ -3,6 +3,9 @@
 import 'package:barcode_scanner/app/modules/home/controllers/home_controller.dart';
 import 'package:get/get.dart';
 
+import 'package:flutter/material.dart';
+
+
 import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,21 +25,20 @@ class MainController extends GetxController {
   Stream<User?> streamAuthStatus() => auth.authStateChanges();
 
   void checkFirestoreConnection() {
-    FirebaseFirestore.instance.collection('description').snapshots().listen(
+    FirebaseFirestore.instance.collection('/part').snapshots().listen(
         (snapshot) {
-      print('Connected to Firestore'); // Connection successful
+      print('Connected to Firestore $snapshot'); // Connection successful
     }, onError: (error) {
       print('Failed to connect to Firestore: $error'); // Connection failed
     });
   }
 
-  addData(bool aktifSlider, String deskSlider, String gambarSlider) async {
-    CollectionReference slider = firestore.collection('');
+  addData() async {
+    CollectionReference slider = firestore.collection('part');
 
     final sliderData = {
-      "active_slider": aktifSlider,
-      "deskripsi_slider": deskSlider,
-      "gambar_slider": gambarSlider
+      "part_name": "TES ADD",
+      "part_image": "",
     };
 
 // Add a new document with a generated ID
@@ -71,9 +73,10 @@ class MainController extends GetxController {
     }
   }
 
-  // Future<QuerySnapshot<Object?>> getDocumentById(String documentId) async {
-  //   CollectionReference produk = firestore.collection('part');
-  //   print(produk);
-  //   return await produk.get();
-  // }
+   Future<QuerySnapshot<Object?>> getData(String id) async {
+    CollectionReference produk = firestore.collection('/part');
+    return await produk.where("part_name", isEqualTo: id).get();
+  }
+  
+  
 }
