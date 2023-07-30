@@ -75,7 +75,10 @@ class MainController extends GetxController {
 
    Future<QuerySnapshot<Object?>> getData(String id) async {
     CollectionReference produk = firestore.collection('/part');
-    return await produk.where("part_name", isEqualTo: id).get();
+    String output1 = id.replaceAll("-", "");
+    String output = output1.replaceAll(" ", "");
+    print("output: $output input: $id");
+    return await produk.where("part_name", isEqualTo: output).get();
   }
   
   
